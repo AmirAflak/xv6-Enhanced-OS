@@ -39,3 +39,5 @@ entry("uptime");
 entry("getHelloWorld");
 entry("getProcTick");
 entry("getProcInfo");
+entry("sysinfo");
+

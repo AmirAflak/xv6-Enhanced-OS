@@ -110,3 +110,10 @@ sys_getProcInfo(void)
 {
   return getProcInfo();
 }
+
+int
+sys_sysinfo(void)
+{
+  return sysinfo();
+  // return 0;
+} 

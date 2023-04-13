@@ -25,6 +25,7 @@ int uptime(void);
 uint64 getHelloWorld(void);
 int getProcTick(int);
 int getProcInfo(void);
+int sysinfo(void);
 
 // ulib.c
 int stat(const char*, struct stat*);

@@ -47,7 +47,7 @@ forktest(void)
 
   print("fork test\n");
   3a:	00000517          	auipc	a0,0x0
-  3e:	42650513          	addi	a0,a0,1062 # 460 <getProcInfo+0xa>
+  3e:	42e50513          	addi	a0,a0,1070 # 468 <sysinfo+0xa>
   42:	00000097          	auipc	ra,0x0
   46:	fbe080e7          	jalr	-66(ra) # 0 <print>
 
@@ -71,7 +71,7 @@ forktest(void)
   if(n == N){
     print("fork claimed to work N times!\n");
   64:	00000517          	auipc	a0,0x0
-  68:	40c50513          	addi	a0,a0,1036 # 470 <getProcInfo+0x1a>
+  68:	41450513          	addi	a0,a0,1044 # 478 <sysinfo+0x1a>
   6c:	00000097          	auipc	ra,0x0
   70:	f94080e7          	jalr	-108(ra) # 0 <print>
     exit(1);
@@ -113,7 +113,7 @@ forktest(void)
 
   print("fork test OK\n");
   b4:	00000517          	auipc	a0,0x0
-  b8:	40c50513          	addi	a0,a0,1036 # 4c0 <getProcInfo+0x6a>
+  b8:	41450513          	addi	a0,a0,1044 # 4c8 <sysinfo+0x6a>
   bc:	00000097          	auipc	ra,0x0
   c0:	f44080e7          	jalr	-188(ra) # 0 <print>
 }
@@ -125,7 +125,7 @@ forktest(void)
   ce:	8082                	ret
       print("wait stopped early\n");
   d0:	00000517          	auipc	a0,0x0
-  d4:	3c050513          	addi	a0,a0,960 # 490 <getProcInfo+0x3a>
+  d4:	3c850513          	addi	a0,a0,968 # 498 <sysinfo+0x3a>
   d8:	00000097          	auipc	ra,0x0
   dc:	f28080e7          	jalr	-216(ra) # 0 <print>
       exit(1);
@@ -134,7 +134,7 @@ forktest(void)
   e6:	2c4080e7          	jalr	708(ra) # 3a6 <exit>
     print("wait got too many\n");
   ea:	00000517          	auipc	a0,0x0
-  ee:	3be50513          	addi	a0,a0,958 # 4a8 <getProcInfo+0x52>
+  ee:	3c650513          	addi	a0,a0,966 # 4b0 <sysinfo+0x52>
   f2:	00000097          	auipc	ra,0x0
   f6:	f0e080e7          	jalr	-242(ra) # 0 <print>
     exit(1);
@@ -840,3 +840,13 @@ getProcInfo:
  458:	00000073          	ecall
  ret
  45c:	8082                	ret
+
+000000000000045e <sysinfo>:
+.global sysinfo
+sysinfo:
+ li a7, SYS_sysinfo
+ 45e:	48e5                	li	a7,25
+ ecall
+ 460:	00000073          	ecall
+ ret
+ 464:	8082                	ret

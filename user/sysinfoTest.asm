@@ -1,34 +1,32 @@
 
-user/_zombie:     file format elf64-littleriscv
+user/_sysinfoTest:     file format elf64-littleriscv
 
 
 Disassembly of section .text:
 
 0000000000000000 <main>:
+#include "kernel/types.h"
 #include "kernel/stat.h"
-#include "user/user.h"
+#include "user.h"
 
-int
-main(void)
-{
+int main(void){ 
    0:	1141                	addi	sp,sp,-16
    2:	e406                	sd	ra,8(sp)
    4:	e022                	sd	s0,0(sp)
    6:	0800                	addi	s0,sp,16
-  if(fork() > 0)
+    // getProcInfo();
+    sysinfo();
    8:	00000097          	auipc	ra,0x0
-   c:	2a2080e7          	jalr	674(ra) # 2aa <fork>
-  10:	00a04763          	bgtz	a0,1e <main+0x1e>
-    sleep(5);  // Let child exit before parent.
-  exit(0);
-  14:	4501                	li	a0,0
-  16:	00000097          	auipc	ra,0x0
-  1a:	29c080e7          	jalr	668(ra) # 2b2 <exit>
-    sleep(5);  // Let child exit before parent.
-  1e:	4515                	li	a0,5
-  20:	00000097          	auipc	ra,0x0
-  24:	322080e7          	jalr	802(ra) # 342 <sleep>
-  28:	b7f5                	j	14 <main+0x14>
+   c:	362080e7          	jalr	866(ra) # 36a <sysinfo>
+    printf("Successful!\n");
+  10:	00000517          	auipc	a0,0x0
+  14:	7e050513          	addi	a0,a0,2016 # 7f0 <malloc+0xe8>
+  18:	00000097          	auipc	ra,0x0
+  1c:	632080e7          	jalr	1586(ra) # 64a <printf>
+    exit(0);
+  20:	4501                	li	a0,0
+  22:	00000097          	auipc	ra,0x0
+  26:	290080e7          	jalr	656(ra) # 2b2 <exit>
 
 000000000000002a <_main>:
 //
@@ -782,7 +780,7 @@ printint(int fd, int xx, int base, int sgn)
     buf[i++] = digits[x % base];
  3b4:	2601                	sext.w	a2,a2
  3b6:	00000517          	auipc	a0,0x0
- 3ba:	44250513          	addi	a0,a0,1090 # 7f8 <digits>
+ 3ba:	45250513          	addi	a0,a0,1106 # 808 <digits>
  3be:	883a                	mv	a6,a4
  3c0:	2705                	addiw	a4,a4,1
  3c2:	02c5f7bb          	remuw	a5,a1,a2
@@ -892,7 +890,7 @@ vprintf(int fd, const char *fmt, va_list ap)
  47e:	07000d93          	li	s11,112
     putc(fd, digits[x >> (sizeof(uint64) * 8 - 4)]);
  482:	00000b97          	auipc	s7,0x0
- 486:	376b8b93          	addi	s7,s7,886 # 7f8 <digits>
+ 486:	386b8b93          	addi	s7,s7,902 # 808 <digits>
  48a:	a839                	j	4a8 <vprintf+0x6a>
         putc(fd, c);
  48c:	85ca                	mv	a1,s2
@@ -1046,7 +1044,7 @@ vprintf(int fd, const char *fmt, va_list ap)
  5c0:	bdf9                	j	49e <vprintf+0x60>
           s = "(null)";
  5c2:	00000917          	auipc	s2,0x0
- 5c6:	22e90913          	addi	s2,s2,558 # 7f0 <malloc+0xe8>
+ 5c6:	23e90913          	addi	s2,s2,574 # 800 <malloc+0xf8>
         while(*s != 0){
  5ca:	02800593          	li	a1,40
  5ce:	bff1                	j	5aa <vprintf+0x16c>

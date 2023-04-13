@@ -109,6 +109,7 @@ void            procdump(void);
 uint64          getHelloWorld(void);
 int             getProcTick(int);
 int             getProcInfo(void);
+int             sysinfo(void);
 
 // swtch.S
 void            swtch(struct context*, struct context*);

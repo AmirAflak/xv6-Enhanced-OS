@@ -120,3 +120,8 @@ getProcInfo:
  li a7, SYS_getProcInfo
  ecall
  ret
+.global sysinfo
+sysinfo:
+ li a7, SYS_sysinfo
+ ecall
+ ret

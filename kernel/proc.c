@@ -5,6 +5,7 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
+#include "sysinfo.h"
 
 // struct {
 //   struct spinlock lock;
@@ -707,7 +708,8 @@ getProcTick(int pid){
   struct proc *p;
   
   for(p = proc; p < &proc[NPROC]; p++){
-    acquire(&p->lock);
+   // acquire(&p->lock);
+    acquire(&tickslock);
     if(pid == p->pid){
       int diff = ticks - p->ctime;
       if (diff < 0){
@@ -715,7 +717,8 @@ getProcTick(int pid){
       }
       printf("%d\n", diff);
     }
-    release(&p->lock);
+   // release(&p->lock);
+   release(&tickslock);
   }
   // printf("%d\n", ticks);
   return 0;
@@ -737,5 +740,12 @@ getProcInfo(void){
     //   cprintf("-pid = %d, create time = %d\n", p->pid, p->ctime);
     // }
   }
+  return 0;
+}
+
+int 
+sysinfo(void)
+{
+  printf("sysinfo ?????\n");
   return 0;
 }
