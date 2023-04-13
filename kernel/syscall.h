@@ -22,3 +22,4 @@
 #define SYS_close  21
 #define SYS_getHelloWorld 22
 #define SYS_getProcTick 23
+#define SYS_getProcInfo 24

@@ -23,7 +23,8 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 uint64 getHelloWorld(void);
-int getProcTick(void);
+int getProcTick(int);
+int getProcInfo(void);
 
 // ulib.c
 int stat(const char*, struct stat*);

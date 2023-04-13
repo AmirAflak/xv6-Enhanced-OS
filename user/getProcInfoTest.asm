@@ -1,24 +1,23 @@
 
-user/_sysTest:     file format elf64-littleriscv
+user/_getProcInfoTest:     file format elf64-littleriscv
 
 
 Disassembly of section .text:
 
 0000000000000000 <main>:
-//     printf("successfull\n");
-//     exit(1);
-// }
+#include "kernel/types.h"
+#include "kernel/stat.h"
+#include "user.h"
 
-int main(int argc, char *argv[])
-{
+int main(void){
    0:	1141                	addi	sp,sp,-16
    2:	e406                	sd	ra,8(sp)
    4:	e022                	sd	s0,0(sp)
    6:	0800                	addi	s0,sp,16
-    getHelloWorld();
+    getProcInfo();
    8:	00000097          	auipc	ra,0x0
-   c:	34a080e7          	jalr	842(ra) # 352 <getHelloWorld>
-    printf("Successfull!!!\n");
+   c:	35a080e7          	jalr	858(ra) # 362 <getProcInfo>
+    printf("Successful!\n");
   10:	00000517          	auipc	a0,0x0
   14:	7e050513          	addi	a0,a0,2016 # 7f0 <malloc+0xf0>
   18:	00000097          	auipc	ra,0x0

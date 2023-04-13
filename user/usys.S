@@ -115,3 +115,8 @@ getProcTick:
  li a7, SYS_getProcTick
  ecall
  ret
+.global getProcInfo
+getProcInfo:
+ li a7, SYS_getProcInfo
+ ecall
+ ret

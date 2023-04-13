@@ -99,5 +99,14 @@ sys_getHelloWorld(void)
 int
 sys_getProcTick(void)
 {
-  return getProcTick();
+  int pid;
+  argint(0, &pid);
+  return getProcTick(pid);
+ // return getProcTick();
+}
+
+int
+sys_getProcInfo(void)
+{
+  return getProcInfo();
 }

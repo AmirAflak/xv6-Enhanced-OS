@@ -6,6 +6,13 @@
 #include "proc.h"
 #include "defs.h"
 
+// struct {
+//   struct spinlock lock;
+//   struct proc proc[NPROC];
+// } ptable;
+
+
+
 struct cpu cpus[NCPU];
 
 struct proc proc[NPROC];
@@ -124,7 +131,7 @@ allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
-  //p->ctime = ticks;
+  p->ctime = ticks;
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
@@ -256,7 +263,6 @@ userinit(void)
 
   release(&p->lock);
 }
-
 // Grow or shrink user memory by n bytes.
 // Return 0 on success, -1 on failure.
 int
@@ -697,7 +703,39 @@ getHelloWorld(void)
 }
 
 int 
-getProcTick(void){
-  printf("%d\n", ticks);
+getProcTick(int pid){
+  struct proc *p;
+  
+  for(p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+    if(pid == p->pid){
+      int diff = ticks - p->ctime;
+      if (diff < 0){
+        diff = diff * -1; 
+      }
+      printf("%d\n", diff);
+    }
+    release(&p->lock);
+  }
+  // printf("%d\n", ticks);
+  return 0;
+}
+
+int 
+getProcInfo(void){
+  struct proc *p;
+  for(p = proc; p < &proc[NPROC]; p++){
+  
+  // for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    printf("#pid = %d, create time = %d\n", p->pid, p->ctime);
+   // printf("ticks :%d\n", ticks)
+
+    // if(p->state == RUNNING){
+    //   printf("#pid = %d, create time = %d, state=%s\n", p->pid, p->ctime, p->state);
+    // }
+    // if(p->state == SLEEPING){
+    //   cprintf("-pid = %d, create time = %d\n", p->pid, p->ctime);
+    // }
+  }
   return 0;
 }

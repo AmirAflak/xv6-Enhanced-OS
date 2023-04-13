@@ -38,4 +38,4 @@ entry("sleep");
 entry("uptime");
 entry("getHelloWorld");
 entry("getProcTick");
-
+entry("getProcInfo");
