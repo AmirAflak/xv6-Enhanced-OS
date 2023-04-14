@@ -5367,7 +5367,6 @@ getProcTick(int pid){
     800026b6:	b7c1                	j	80002676 <getProcTick+0x36>
   //  release(&tickslock);
   }
-  // printf("%d\n", ticks);
   return 0;
 }
     800026b8:	4501                	li	a0,0
@@ -5494,10 +5493,6 @@ getTicks(void){
     8000277a:	1141                	addi	sp,sp,-16
     8000277c:	e422                	sd	s0,8(sp)
     8000277e:	0800                	addi	s0,sp,16
-
-  // printf("%d\n", ticks);
-
-  // release(&p->lock);
   return ticks;
 }
     80002780:	00006797          	auipc	a5,0x6
@@ -6637,7 +6632,6 @@ sys_getProcTick(void)
     80002f90:	fec42503          	lw	a0,-20(s0)
     80002f94:	fffff097          	auipc	ra,0xfffff
     80002f98:	6ac080e7          	jalr	1708(ra) # 80002640 <getProcTick>
- // return getProcTick();
 }
     80002f9c:	60e2                	ld	ra,24(sp)
     80002f9e:	6442                	ld	s0,16(sp)

@@ -5,8 +5,8 @@ user/_getProcTicksTest:     file format elf64-littleriscv
 Disassembly of section .text:
 
 0000000000000000 <main>:
-//     exit(0);
-// }
+#include "kernel/stat.h"
+#include "user.h"
 
 int
 main(int argc, char **argv)

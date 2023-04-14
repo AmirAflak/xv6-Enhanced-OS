@@ -104,7 +104,6 @@ sys_getProcTick(void)
   int pid;
   argint(0, &pid);
   return getProcTick(pid);
- // return getProcTick();
 }
 
 int
@@ -113,15 +112,6 @@ sys_getProcInfo(void)
   return getProcInfo();
 }
 
-// int
-// sys_sysinfo(void)
-// {
-//   return sysinfo();
-//   if(argaddr(0, &info) < 0)
-//     return -1;
-//   return systeminfo(info);
-//   // return 0;
-// } 
 
 uint64
 sys_sysinfo(void)
@@ -135,9 +125,6 @@ sys_sysinfo(void)
 
   // get user space pointer
   argaddr(0, &pinfo);
-  // printf("Virt Addr: %p\n", pinfo);
-  // if (argaddr(0, &pinfo) < 0)
-  //   return -1;
 
   // get sysinfo
   info.freemem = nfreemem();

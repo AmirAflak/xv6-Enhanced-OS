@@ -2,12 +2,6 @@
 #include "kernel/stat.h"
 #include "user.h"
 
-// int main(void){
-//     getProcTick();
-//     printf("  successful!\n");
-//     exit(0);
-// }
-
 int
 main(int argc, char **argv)
 {

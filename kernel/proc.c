@@ -720,7 +720,6 @@ getProcTick(int pid){
    release(&p->lock);
   //  release(&tickslock);
   }
-  // printf("%d\n", ticks);
   return 0;
 }
 
@@ -767,13 +766,6 @@ nproc(struct sysinfo *addr)
 
 double 
 getTicks(void){
-  // struct proc *p;
-
-  // acquire(&p->lock);
-
-  // printf("%d\n", ticks);
-
-  // release(&p->lock);
   return ticks;
 }
 
