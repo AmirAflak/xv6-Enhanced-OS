@@ -708,8 +708,8 @@ getProcTick(int pid){
   struct proc *p;
   
   for(p = proc; p < &proc[NPROC]; p++){
-   // acquire(&p->lock);
-    acquire(&tickslock);
+   acquire(&p->lock);
+    // acquire(&tickslock);
     if(pid == p->pid){
       int diff = ticks - p->ctime;
       if (diff < 0){
@@ -717,8 +717,8 @@ getProcTick(int pid){
       }
       printf("%d\n", diff);
     }
-   // release(&p->lock);
-   release(&tickslock);
+   release(&p->lock);
+  //  release(&tickslock);
   }
   // printf("%d\n", ticks);
   return 0;
@@ -730,10 +730,11 @@ getProcInfo(void){
   for(p = proc; p < &proc[NPROC]; p++){
   
   // for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+  if(p->state != UNUSED)
     printf("#pid = %d, create time = %d\n", p->pid, p->ctime);
    // printf("ticks :%d\n", ticks)
 
-    // if(p->state == RUNNING){
+    // if(p->state != UNUSED){
     //   printf("#pid = %d, create time = %d, state=%s\n", p->pid, p->ctime, p->state);
     // }
     // if(p->state == SLEEPING){
@@ -743,9 +744,49 @@ getProcInfo(void){
   return 0;
 }
 
-int 
-sysinfo(void)
+// int 
+// sysinfo(void)
+// {
+//   printf("sysinfo ?????\n");
+//   return 0;
+// }
+uint64
+nproc(struct sysinfo *addr)
 {
-  printf("sysinfo ?????\n");
-  return 0;
+  uint64 cnt = 0;
+
+  for (int i = 0; i < NPROC; i++) {
+    acquire(&proc[i].lock); 
+    if (proc[i].state != UNUSED)
+      cnt++;
+    release(&proc[i].lock);
+  }
+
+  return cnt;
 }
+
+double 
+getTicks(void){
+  // struct proc *p;
+
+  // acquire(&p->lock);
+
+  // printf("%d\n", ticks);
+
+  // release(&p->lock);
+  return ticks;
+}
+
+// int
+// sysinfo(int addr) {
+//   struct proc *p = myproc();
+//   struct sysinfo info;
+
+//   info.freemem = nfreemem();
+//   info.nproc = nproc();
+
+//   if(copyout(p->pagetable, addr, (char *)&info, sizeof(info)) < 0)
+//     return -1;
+//   return 0;
+// }
+

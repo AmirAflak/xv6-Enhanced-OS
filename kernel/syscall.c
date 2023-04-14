@@ -64,8 +64,9 @@ argint(int n, int *ip)
 // copyin/copyout will do that.
 void
 argaddr(int n, uint64 *ip)
-{
+{ 
   *ip = argraw(n);
+  // return 0;
 }
 
 // Fetch the nth word-sized system call argument as a null-terminated string.

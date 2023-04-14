@@ -8,6 +8,7 @@ struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
+struct sysinfo;
 
 // bio.c
 void            binit(void);
@@ -63,12 +64,15 @@ void            ramdiskrw(struct buf*);
 void*           kalloc(void);
 void            kfree(void *);
 void            kinit(void);
+//int             freemem(void);
+uint64          nfreemem();
 
 // log.c
 void            initlog(int, struct superblock*);
 void            log_write(struct buf*);
 void            begin_op(void);
 void            end_op(void);
+//int             nproc(void);
 
 // pipe.c
 int             pipealloc(struct file**, struct file**);
@@ -109,7 +113,13 @@ void            procdump(void);
 uint64          getHelloWorld(void);
 int             getProcTick(int);
 int             getProcInfo(void);
-int             sysinfo(void);
+int             sysinfo(int);
+//int             nproc(void);
+uint64          nproc();
+double             getTicks();
+uint64          getTotalRam();
+
+
 
 // swtch.S
 void            swtch(struct context*, struct context*);

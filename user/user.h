@@ -1,4 +1,5 @@
 struct stat;
+struct sysinfo;
 
 // system calls
 int fork(void);
@@ -25,7 +26,7 @@ int uptime(void);
 uint64 getHelloWorld(void);
 int getProcTick(int);
 int getProcInfo(void);
-int sysinfo(void);
+int sysinfo(struct sysinfo *);
 
 // ulib.c
 int stat(const char*, struct stat*);

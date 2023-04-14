@@ -5,6 +5,8 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "sysinfo.h"
+// #include "kalloc.c"
 
 uint64
 sys_exit(void)
@@ -111,9 +113,43 @@ sys_getProcInfo(void)
   return getProcInfo();
 }
 
-int
+// int
+// sys_sysinfo(void)
+// {
+//   return sysinfo();
+//   if(argaddr(0, &info) < 0)
+//     return -1;
+//   return systeminfo(info);
+//   // return 0;
+// } 
+
+uint64
 sys_sysinfo(void)
 {
-  return sysinfo();
-  // return 0;
-} 
+  // get current process running on cpu
+  struct proc *p = myproc();
+  // temporary buffer to store sysinfo in kernel space
+  struct sysinfo info;
+  // user space pointer to struct sysinfo
+  uint64 pinfo;
+
+  // get user space pointer
+  argaddr(0, &pinfo);
+  // printf("Virt Addr: %p\n", pinfo);
+  // if (argaddr(0, &pinfo) < 0)
+  //   return -1;
+
+  // get sysinfo
+  info.freemem = nfreemem();
+  info.nproc = nproc();
+  info.uptime = getTicks();
+  info.totalram = getTotalRam();
+
+  
+  
+  // copy sysinfo from kernel to user
+  if (copyout(p->pagetable, pinfo, (char *)&info, sizeof(struct sysinfo)) < 0)
+    return -1;
+
+  return 0;
+}
