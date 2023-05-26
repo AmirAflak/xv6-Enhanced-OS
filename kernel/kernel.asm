@@ -6657,8 +6657,7 @@ sys_getProcInfo(void)
     80002fba:	8082                	ret
 
 0000000080002fbc <sys_sysinfo>:
-//   // return 0;
-// } 
+
 
 uint64
 sys_sysinfo(void)
@@ -6683,9 +6682,6 @@ sys_sysinfo(void)
     80002fd4:	4501                	li	a0,0
     80002fd6:	00000097          	auipc	ra,0x0
     80002fda:	ce6080e7          	jalr	-794(ra) # 80002cbc <argaddr>
-  // printf("Virt Addr: %p\n", pinfo);
-  // if (argaddr(0, &pinfo) < 0)
-  //   return -1;
 
   // get sysinfo
   info.freemem = nfreemem();

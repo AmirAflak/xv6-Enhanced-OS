@@ -48,6 +48,7 @@ TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' 
 	echo "***" 1>&2; exit 1; fi)
 endif
 
+
 QEMU = qemu-system-riscv64
 
 CC = $(TOOLPREFIX)gcc
@@ -70,6 +71,11 @@ endif
 ifneq ($(shell $(CC) -dumpspecs 2>/dev/null | grep -e '[^f]nopie'),)
 CFLAGS += -fno-pie -nopie
 endif
+
+ifndef SCHEDULER
+SCHEDULER:=RR
+endif
+CFLAGS+="-D$(SCHEDULER)"
 
 LDFLAGS = -z max-page-size=4096
 
@@ -165,6 +171,9 @@ QEMUOPTS = -machine virt -bios none -kernel $K/kernel -m 128M -smp $(CPUS) -nogr
 QEMUOPTS += -global virtio-mmio.force-legacy=false
 QEMUOPTS += -drive file=fs.img,if=none,format=raw,id=x0
 QEMUOPTS += -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+
+# flags:
+# 	@echo $(SCHEDPOLICY)
 
 qemu: $K/kernel fs.img
 	$(QEMU) $(QEMUOPTS)
