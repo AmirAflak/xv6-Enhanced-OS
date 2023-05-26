@@ -519,7 +519,7 @@ scheduler(void)
         acquire(&p->lock);
         if (p->state == RUNNABLE)
         {
-          if (!firstProcess || p->timeOfCreation < firstProcess->timeOfCreation)
+          if (!firstProcess || p->ctime < firstProcess->ctime)
             {
                 if (firstProcess)
                     release(&firstProcess->lock);
