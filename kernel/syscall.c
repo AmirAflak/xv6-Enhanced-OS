@@ -106,6 +106,7 @@ extern uint64 sys_getHelloWorld(void);
 extern uint64 sys_getProcTick(void);
 extern uint64 sys_getProcInfo(void);
 extern uint64 sys_sysinfo(void);
+extern uint64 sys_changeSch(void);
 
 
 // An array mapping syscall numbers from syscall.h
@@ -136,6 +137,7 @@ static uint64 (*syscalls[])(void) = {
 [SYS_getProcTick] sys_getProcTick,
 [SYS_getProcInfo] sys_getProcInfo,
 [SYS_sysinfo] sys_sysinfo,
+[SYS_changeSch] sys_changeSch,
 };
 
 void

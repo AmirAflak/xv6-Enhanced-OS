@@ -118,6 +118,7 @@ int             sysinfo(int);
 uint64          nproc();
 double             getTicks();
 uint64          getTotalRam();
+int             changeSch(int);
 
 
 

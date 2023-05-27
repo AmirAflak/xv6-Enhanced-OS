@@ -125,3 +125,8 @@ sysinfo:
  li a7, SYS_sysinfo
  ecall
  ret
+.global changeSch
+changeSch:
+ li a7, SYS_changeSch
+ ecall
+ ret

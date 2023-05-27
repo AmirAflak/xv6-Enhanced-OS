@@ -24,4 +24,6 @@
 #define SYS_getProcTick 23
 #define SYS_getProcInfo 24
 #define SYS_sysinfo 25  
+#define SYS_changeSch 26  
+
 

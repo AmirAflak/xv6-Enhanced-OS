@@ -850,3 +850,22 @@ getTicks(void){
 //   return 0;
 // }
 
+int
+changeSch(int sch_id){
+  switch(sch_id) {
+    case 0: // Round-robin scheduling algorithm
+      cprintf("Setting scheduling algorithm to round-robin\n");
+      // Code to set the algorithm goes here
+      break;
+
+    case 1: // First-in, first-out scheduling algorithm
+      cprintf("Setting scheduling algorithm to FIFO\n");
+      // Code to set the algorithm goes here
+      break;
+
+    default:
+      cprintf("Invalid scheduling algorithm\n");
+      break;
+  return 0;
+}
+}

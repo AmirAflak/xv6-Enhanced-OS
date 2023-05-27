@@ -27,6 +27,7 @@ uint64 getHelloWorld(void);
 int getProcTick(int);
 int getProcInfo(void);
 int sysinfo(struct sysinfo *);
+int changeSch(int);
 
 // ulib.c
 int stat(const char*, struct stat*);

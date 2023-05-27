@@ -140,3 +140,12 @@ sys_sysinfo(void)
 
   return 0;
 }
+
+int
+sys_changeSch(void)
+{
+  int sch_id;
+  argint(0, &sch_id);
+  return changeSch(sch_id);
+}
+

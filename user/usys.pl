@@ -40,4 +40,5 @@ entry("getHelloWorld");
 entry("getProcTick");
 entry("getProcInfo");
 entry("sysinfo");
+entry("changeSch");
 
